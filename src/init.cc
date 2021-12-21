@@ -1,4 +1,5 @@
 #include "editor.h"
+void Editor::disableraw() { tcsetattr(STDIN_FILENO, TCSAFLUSH, &originTermios); }
 
 Editor::Editor() {
   cursorx = cursory = renderx = 0;
@@ -34,6 +35,8 @@ void Editor::enableraw() {
   struct termios raw;
   tcgetattr(STDIN_FILENO, &originTermios);
 
+  atexit(Editor::disableraw);
+  // atexit(Editor::~Editor);
   raw = originTermios;
   raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
   raw.c_oflag &= ~(OPOST);
@@ -43,3 +46,5 @@ void Editor::enableraw() {
   raw.c_cc[VTIME] = 1;
   tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
 }
+
+

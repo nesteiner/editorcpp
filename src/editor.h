@@ -20,8 +20,8 @@ using std::ofstream;
 using std::ifstream;
 using std::ios;
 
-
 const int TAB_STOP = 8;
+extern struct termios originTermios;
 
 class Editor {
 private:			// for basic
@@ -44,6 +44,7 @@ private:			// for status
 private:
   int windowsize();
   void enableraw();
+  static void disableraw();
   int cxtorx(string & chars);
 
 public:

@@ -57,7 +57,7 @@ void Editor::moveright() {
   } else if(row.length() != 0 && cursorx == row.length()) {
     cursory += 1;
     cursorx = 0;
-  } else if(cursory < row.length()) {
+  } else if(cursorx >= row.length()) {
     cursory += 1;
     cursorx = 0;
   }
